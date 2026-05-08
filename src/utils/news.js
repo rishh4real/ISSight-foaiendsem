@@ -15,10 +15,24 @@ export function normalizeArticle(article, category) {
     author: article.author || 'Unknown author',
     publishedAt: article.publishedAt || new Date().toISOString(),
     urlToImage: article.urlToImage || '',
-    description: article.description || 'No description available.',
+    description: cleanArticleText(article.description || 'No description available.'),
     url: article.url || '#',
     category,
   };
+}
+
+export function cleanArticleText(value = '') {
+  return String(value)
+    .replace(/<!\[CDATA\[(.*?)\]\]>/gs, '$1')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 export function formatDate(value) {
