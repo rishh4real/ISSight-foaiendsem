@@ -22,11 +22,12 @@ VITE_HF_TOKEN=your_huggingface_token_here
 1. Push the project to GitHub.
 2. Import it in Vercel as a Vite project.
 3. Add environment variables in Vercel Project Settings:
-   - `VITE_NEWS_API_KEY`
+   - `VITE_NEWS_API_KEY` or `NEWS_API_KEY`
    - `VITE_HF_TOKEN`
 4. Deploy. The included `vercel.json` routes SPA paths to `index.html`.
 
 ## Notes
 
 - Open Notify API endpoints are HTTP-only, so the deployed app uses Vercel serverless routes in `api/iss-now.js` and `api/astros.js` to avoid browser mixed-content blocking.
+- NewsAPI Developer plan blocks deployed browser requests, so production news calls go through `api/news.js`.
 - The chatbot intentionally refuses questions outside ISS, people in space, and the currently loaded news articles.

@@ -37,7 +37,7 @@ export function useNews() {
 
   const fetchCategory = useCallback(
     async (category, { silent = false } = {}) => {
-      if (!apiKey) {
+      if (!import.meta.env.PROD && !apiKey) {
         setErrors((current) => ({
           ...current,
           [category]: 'Missing VITE_NEWS_API_KEY. Add it to your .env file.',
@@ -49,13 +49,15 @@ export function useNews() {
       setErrors((current) => ({ ...current, [category]: '' }));
 
       try {
-        const { data } = await axios.get('https://newsapi.org/v2/top-headlines', {
-          params: {
-            country: 'us',
-            category,
-            pageSize: 10,
-            apiKey,
-          },
+        const { data } = await axios.get(import.meta.env.PROD ? '/api/news' : 'https://newsapi.org/v2/top-headlines', {
+          params: import.meta.env.PROD
+            ? { category }
+            : {
+                country: 'us',
+                category,
+                pageSize: 10,
+                apiKey,
+              },
           timeout: 15000,
         });
 
