@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 import Chatbot from './components/Chatbot';
 import ISSTracker from './components/ISSTracker';
 import NewsChart from './components/NewsChart';
@@ -19,6 +20,14 @@ export default function App() {
     document.documentElement.classList.toggle('dark', theme === 'dark');
   }, [theme]);
 
+  const handleThemeToggle = () => {
+    setTheme((current) => {
+      const nextTheme = current === 'dark' ? 'light' : 'dark';
+      toast.success(`${nextTheme === 'dark' ? 'Dark' : 'Light'} mode enabled.`);
+      return nextTheme;
+    });
+  };
+
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900 transition-colors dark:bg-slate-950 dark:text-slate-100">
       <Toast />
@@ -34,7 +43,7 @@ export default function App() {
           </div>
           <ThemeToggle
             theme={theme}
-            onToggle={() => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))}
+            onToggle={handleThemeToggle}
           />
         </div>
       </header>

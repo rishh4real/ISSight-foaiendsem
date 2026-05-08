@@ -62,6 +62,7 @@ export default function NewsDashboard({
           <button
             type="button"
             onClick={() => onRefresh(activeCategory)}
+            disabled={loading}
             className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
           >
             <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
