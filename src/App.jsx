@@ -34,12 +34,17 @@ export default function App() {
       <header className="sticky top-0 z-[900] border-b border-slate-200 bg-white/85 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/85">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-600 dark:text-cyan-300">
-              Space + Signals
-            </p>
-            <h1 className="mt-1 text-xl font-black text-slate-950 dark:text-white sm:text-2xl">
-              ISS & News Intelligence Dashboard
-            </h1>
+            <div className="flex items-center gap-3">
+              <img src="/logo.svg" alt="" className="h-11 w-11 rounded-2xl shadow-sm" />
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-600 dark:text-cyan-300">
+                  Space + Signals
+                </p>
+                <h1 className="mt-1 text-xl font-black text-slate-950 dark:text-white sm:text-2xl">
+                  ISS & News Intelligence Dashboard
+                </h1>
+              </div>
+            </div>
           </div>
           <ThemeToggle
             theme={theme}
