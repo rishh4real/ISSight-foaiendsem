@@ -28,5 +28,5 @@ VITE_HF_TOKEN=your_huggingface_token_here
 
 ## Notes
 
-- Open Notify API endpoints are HTTP-only. If a deployed HTTPS page blocks mixed content, use a small serverless proxy or run the dashboard locally for the ISS API calls.
+- Open Notify API endpoints are HTTP-only, so the deployed app uses Vercel serverless routes in `api/iss-now.js` and `api/astros.js` to avoid browser mixed-content blocking.
 - The chatbot intentionally refuses questions outside ISS, people in space, and the currently loaded news articles.

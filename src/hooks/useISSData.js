@@ -3,8 +3,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { calculateSpeedKmh, getNearestPlace, toNumber } from '../utils/geo';
 
-const ISS_URL = 'http://api.open-notify.org/iss-now.json';
-const PEOPLE_URL = 'http://api.open-notify.org/astros.json';
+const ISS_URL = import.meta.env.PROD ? '/api/iss-now' : 'http://api.open-notify.org/iss-now.json';
+const PEOPLE_URL = import.meta.env.PROD ? '/api/astros' : 'http://api.open-notify.org/astros.json';
 const MAX_TRAJECTORY_POINTS = 15;
 const MAX_SPEED_POINTS = 30;
 
