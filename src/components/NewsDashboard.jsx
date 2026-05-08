@@ -1,5 +1,5 @@
 import { ExternalLink, RefreshCw, Search } from 'lucide-react';
-import { CATEGORY_LABELS, cleanArticleText } from '../utils/news';
+import { CATEGORY_LABELS, cleanArticleText, getNewsImage } from '../utils/news';
 import { formatDate } from '../utils/news';
 
 function NewsSkeleton() {
@@ -30,14 +30,6 @@ export default function NewsDashboard({
   error,
   onRefresh,
 }) {
-  const categoryAccent = {
-    general: 'from-blue-600 to-cyan-500',
-    technology: 'from-emerald-600 to-teal-400',
-    science: 'from-orange-500 to-amber-300',
-    health: 'from-rose-600 to-pink-400',
-    entertainment: 'from-violet-600 to-fuchsia-400',
-  };
-
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft dark:border-slate-800 dark:bg-slate-900 dark:shadow-soft-dark">
       <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
@@ -122,28 +114,15 @@ export default function NewsDashboard({
               className="overflow-hidden rounded-xl border border-slate-200 bg-slate-50 transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-slate-950/70"
             >
               <div className="aspect-[16/9] bg-slate-200 dark:bg-slate-800">
-                {article.urlToImage ? (
-                  <img
-                    src={article.urlToImage}
-                    alt=""
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                    onError={(event) => {
-                      event.currentTarget.style.display = 'none';
-                    }}
-                  />
-                ) : (
-                  <div
-                    className={`flex h-full w-full flex-col justify-end bg-gradient-to-br ${
-                      categoryAccent[article.category] || categoryAccent.general
-                    } p-5 text-white`}
-                  >
-                    <span className="text-xs font-bold uppercase tracking-[0.22em] text-white/75">
-                      {CATEGORY_LABELS[article.category] || 'News'}
-                    </span>
-                    <span className="mt-2 max-w-xs text-2xl font-black leading-tight">{article.source}</span>
-                  </div>
-                )}
+                <img
+                  src={getNewsImage(article)}
+                  alt=""
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  onError={(event) => {
+                    event.currentTarget.src = getNewsImage({ category: article.category, urlToImage: '' });
+                  }}
+                />
               </div>
               <div className="p-4">
                 <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
